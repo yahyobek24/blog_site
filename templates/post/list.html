@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+{% block title %}IT_NEWS{% endblock %}
+
+{% block content %}
+    <h1>IT-NEWS</h1>
+     {% for post in posts %}
+        <div class="post">
+            <h2>
+                <a href="{{ post.get_absolute_url}}"> {{ post.title  }}</a>
+            </h2>
+            <p class="date">
+                Published {{ post. publish }} by {{ post.author}}
+            </p>
+        </div>
+     {% endfor %}
+     {% include 'paginator.html' with page=page_obj %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if page.has_previous %}
+        <a href="?page={{ page.previous_page_number}}">Avvalgi</a>
+        {% endif %}
+        <span class="current">
+            Page {{ page.number }} of {{ page.paginator.num_pages }}
+        </span>
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number}}">Keyingi</a>
+        {% endif %}
+    </span>
+
+    </div>
+{% endblock %}
